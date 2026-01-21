@@ -18,6 +18,7 @@
             --secondary-purple: #b5179e;
             --accent-green: #06d6a0;
             --accent-orange: #ff9e00;
+            --accent-red: #ff6b6b;
             --light-blue: #e0f7ff;
             --white: #ffffff;
             --light-gray: #f8f9fa;
@@ -27,6 +28,7 @@
             --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
             --gradient-secondary: linear-gradient(135deg, var(--secondary-blue), var(--secondary-purple));
             --gradient-accent: linear-gradient(135deg, var(--accent-green), var(--accent-orange));
+            --gradient-error: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
             --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -542,7 +544,7 @@
             opacity: 1;
         }
 
-        /* Modal with Animation */
+        /* SMALLER MODAL STYLES */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -575,9 +577,10 @@
             background: var(--white);
             border-radius: var(--radius-lg);
             width: 100%;
-            max-width: 550px;
+            max-width: 450px; /* Smaller width */
+            max-height: 85vh;
+            overflow-y: auto;
             box-shadow: var(--shadow-xl);
-            overflow: hidden;
             transform: scale(0.9);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid var(--medium-gray);
@@ -595,24 +598,26 @@
         }
 
         .modal-header {
-            padding: 35px;
+            padding: 25px; /* Smaller padding */
             background: var(--gradient-primary);
             color: white;
             position: relative;
+            text-align: center;
         }
 
         .modal-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem; /* Smaller font */
             font-weight: 800;
             font-family: 'Poppins', sans-serif;
+            margin: 0;
         }
 
         .modal-body {
-            padding: 35px;
+            padding: 25px; /* Smaller padding */
         }
 
         .form-group {
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* Smaller margin */
             opacity: 0;
             transform: translateY(20px);
             animation: formFieldReveal 0.5s ease forwards;
@@ -633,19 +638,19 @@
 
         .form-label {
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 8px; /* Smaller margin */
             font-weight: 600;
             color: var(--dark);
-            font-size: 1rem;
+            font-size: 0.95rem; /* Smaller font */
             letter-spacing: 0.5px;
         }
 
         .form-control {
             width: 100%;
-            padding: 18px 25px;
+            padding: 14px 20px; /* Smaller padding */
             border: 2px solid var(--medium-gray);
-            border-radius: 12px;
-            font-size: 1.05rem;
+            border-radius: 10px;
+            font-size: 1rem; /* Smaller font */
             transition: var(--transition);
             font-family: 'Inter', sans-serif;
             background: var(--light-gray);
@@ -656,7 +661,7 @@
             outline: none;
             border-color: var(--primary-blue);
             background: var(--white);
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
         }
 
         .form-control[readonly] {
@@ -667,20 +672,20 @@
 
         .btn-submit {
             width: 100%;
-            padding: 20px;
+            padding: 16px; /* Smaller padding */
             background: var(--gradient-primary);
             color: white;
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Smaller font */
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: var(--transition);
             margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -698,7 +703,7 @@
             }
         }
 
-        .btn-submit::after {
+  .btn-submit::after {
             content: '';
             position: absolute;
             top: 0;
@@ -715,7 +720,7 @@
             opacity: 1;
         }
 
- .btn-submit:disabled {
+        .btn-submit:disabled {
             background: var(--dark-gray);
             cursor: not-allowed;
             transform: none;
@@ -734,8 +739,8 @@
         .btn-submit.loading::before {
             content: '';
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
@@ -749,15 +754,15 @@
         /* Close Button */
         .close-modal {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 15px;
+            right: 15px;
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: white;
             cursor: pointer;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -769,6 +774,113 @@
         .close-modal:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: rotate(90deg);
+        }
+
+        /* Error Message Styles */
+        .error-message {
+            display: none;
+            background: var(--gradient-error);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: errorSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .error-message.show {
+            display: block;
+            animation: errorSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes errorSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-message i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Toast Notification for Errors */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-error);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-xl);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 350px;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast-notification.hide {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .toast-message {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .success-message.show {
+            display: block;
+            animation: successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes successSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Footer */
@@ -838,43 +950,6 @@
             border-top: 1px solid var(--medium-gray);
         }
 
-        /* Success Message */
-        .success-message {
-            display: none;
-            background: var(--gradient-accent);
-            color: white;
-            padding: 25px;
-            border-radius: var(--radius);
-            margin-top: 30px;
-            text-align: center;
-            animation: successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: var(--shadow-md);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .success-message.show {
-            display: block;
-            animation: successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes successSlideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Floating Animation for Cards */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .project-card:hover {
-            animation: float 3s ease-in-out infinite;
-        }
-
         /* Responsive Styles */
         @media (max-width: 1200px) {
             .projects-grid {
@@ -920,12 +995,21 @@
                 flex-direction: column;
             }
             
+            .modal {
+                max-width: 90%;
+                max-height: 90vh;
+            }
+            
             .modal-body {
-                padding: 25px;
+                padding: 20px;
             }
             
             .modal-header {
-                padding: 30px 25px;
+                padding: 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.6rem;
             }
         }
 
@@ -972,6 +1056,21 @@
             
             .footer-title {
                 font-size: 1.8rem;
+            }
+            
+            .modal {
+                max-width: 95%;
+            }
+            
+            .modal-title {
+                font-size: 1.4rem;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
             }
         }
     </style>
@@ -1149,6 +1248,11 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
+                <div id="errorMsg" class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText">Please check your information and try again.</span>
+                </div>
+                
                 <form id="purchaseForm">
                     <div class="form-group">
                         <label class="form-label" for="name">Full Name *</label>
@@ -1160,7 +1264,7 @@
                         <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
                     </div>
                     
-                    <div class="form-group">
+                     <div class="form-group">
                         <label class="form-label" for="mobile">Mobile Number *</label>
                         <input type="tel" id="mobile" class="form-control" placeholder="Enter your mobile number" required>
                     </div>
@@ -1175,7 +1279,7 @@
                     
                     <div class="form-group">
                         <label class="form-label" for="message">Message (Optional)</label>
-                        <textarea id="message" class="form-control" rows="4" placeholder="Any specific customization or requirements..."></textarea>
+                        <textarea id="message" class="form-control" rows="3" placeholder="Any specific customization or requirements..."></textarea>
                     </div>
                     
                     <div id="successMsg" class="success-message">
@@ -1184,10 +1288,21 @@
                     
                     <button type="submit" class="btn-submit" id="submitBtn">
                         <i class="fas fa-paper-plane"></i>
-                        <span> Purchase Request</span>
+                        <span>Purchase Request</span>
                     </button>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification for Errors -->
+    <div id="toast" class="toast-notification">
+        <div class="toast-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <div class="toast-content">
+            <div class="toast-title" id="toastTitle">Error</div>
+            <div class="toast-message" id="toastMessage">Something went wrong</div>
         </div>
     </div>
 
@@ -1204,9 +1319,14 @@
         const githubInput = document.getElementById("github");
         const liveInput = document.getElementById("live");
         const successMsg = document.getElementById("successMsg");
+        const errorMsg = document.getElementById("errorMsg");
+        const errorText = document.getElementById("errorText");
         const closeModalBtn = document.querySelector(".close-modal");
         const purchaseForm = document.getElementById("purchaseForm");
         const submitBtn = document.getElementById("submitBtn");
+        const toast = document.getElementById("toast");
+        const toastTitle = document.getElementById("toastTitle");
+        const toastMessage = document.getElementById("toastMessage");
 
         // Page Loading Animation
         window.addEventListener('load', function() {
@@ -1222,7 +1342,7 @@
             loadingOverlay.classList.add('hidden');
         }, 4000);
 
- // Open modal when Buy Now is clicked and set data attributes
+        // Open modal when Buy Now is clicked and set data attributes
         document.querySelectorAll(".btn-buy").forEach(btn => {
             btn.addEventListener("click", () => {
                 projectInput.value = btn.dataset.project;
@@ -1231,6 +1351,8 @@
                 modal.classList.add("active");
                 document.body.style.overflow = "hidden";
                 successMsg.classList.remove("show");
+                errorMsg.classList.remove("show");
+                purchaseForm.reset();
             });
         });
 
@@ -1257,29 +1379,39 @@
         purchaseForm.addEventListener("submit", async function(e) {
             e.preventDefault();
             
+            // Hide previous messages
+            successMsg.classList.remove("show");
+            errorMsg.classList.remove("show");
+            
             // Get form values
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const mobile = document.getElementById("mobile").value;
-            const message = document.getElementById("message").value;
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const mobile = document.getElementById("mobile").value.trim();
+            const message = document.getElementById("message").value.trim();
             
-            // Simple validation
-            if (!name || !email || !mobile) {
-                showError("Please fill in all required fields.");
-                return;
+            // Validation
+            let error = null;
+            
+            if (!name) {
+                error = "Please enter your full name.";
+                highlightErrorField("name");
+            } else if (!email) {
+                error = "Please enter your email address.";
+                highlightErrorField("email");
+            } else if (!isValidEmail(email)) {
+                error = "Please enter a valid email address.";
+                highlightErrorField("email");
+            } else if (!mobile) {
+                error = "Please enter your mobile number.";
+                highlightErrorField("mobile");
+            } else if (!isValidMobile(mobile)) {
+                error = "Please enter a valid mobile number (at least 10 digits).";
+                highlightErrorField("mobile");
             }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showError("Please enter a valid email address.");
-                return;
-            }
-            
-            // Mobile validation
-            const mobileDigits = mobile.replace(/\D/g, '');
-            if (mobileDigits.length < 10) {
-                showError("Please enter a valid mobile number (at least 10 digits).");
+            if (error) {
+                showErrorInModal(error);
+                showToast("Validation Error", error);
                 return;
             }
             
@@ -1321,35 +1453,62 @@
                 
             } catch (error) {
                 console.error("EmailJS Error:", error);
-                showError("Sorry, there was an error sending your request. Please try again.");
+                const errorMessage = "Sorry, there was an error sending your request. Please try again.";
+                showErrorInModal(errorMessage);
+                showToast("Submission Failed", errorMessage);
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             }
         });
 
-        // Error notification function
-        function showError(message) {
-            // Create error notification
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'success-message';
-            errorDiv.style.background = 'linear-gradient(135deg, #ff6b6b, #ff9e00)';
-            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-            errorDiv.style.position = 'fixed';
-            errorDiv.style.top = '20px';
-            errorDiv.style.right = '20px';
-            errorDiv.style.zIndex = '9999';
-            errorDiv.style.maxWidth = '300px';
-            errorDiv.style.animation = 'successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
-            
-            document.body.appendChild(errorDiv);
-            
-            // Remove error after 3 seconds
-            setTimeout(() => {
-                errorDiv.style.animation = 'successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) reverse forwards';
+        // Helper Functions
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidMobile(mobile) {
+            const mobileDigits = mobile.replace(/\D/g, '');
+            return mobileDigits.length >= 10;
+        }
+
+        function highlightErrorField(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.style.borderColor = 'var(--accent-red)';
+                field.style.boxShadow = '0 0 0 3px rgba(255, 107, 107, 0.1)';
+                field.focus();
+                
+                // Remove error styling after 3 seconds
                 setTimeout(() => {
-                    document.body.removeChild(errorDiv);
-                }, 600);
-            }, 3000);
+                    field.style.borderColor = '';
+                    field.style.boxShadow = '';
+                }, 3000);
+            }
+        }
+
+        function showErrorInModal(message) {
+            errorText.textContent = message;
+            errorMsg.classList.add("show");
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                errorMsg.classList.remove("show");
+            }, 5000);
+        }
+
+        function showToast(title, message) {
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('hide');
+            toast.classList.add('show');
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+            }, 5000);
         }
 
         // Close modal handler function
@@ -1358,6 +1517,7 @@
             document.body.style.overflow = "auto";
             purchaseForm.reset();
             successMsg.classList.remove("show");
+            errorMsg.classList.remove("show");
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
         }
@@ -1380,7 +1540,7 @@
             
             input.addEventListener('focus', function() {
                 this.style.borderColor = 'var(--primary-blue)';
-                this.style.boxShadow = '0 0 0 4px rgba(67, 97, 238, 0.1)';
+                this.style.boxShadow = '0 0 0 3px rgba(67, 97, 238, 0.1)';
             });
         });
 
