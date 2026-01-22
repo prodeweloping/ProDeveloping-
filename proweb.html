@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proweb - Premium Website Templates</title>
+    <title>Proweb</title>
     <!-- EmailJS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <!-- Google Fonts -->
@@ -703,7 +703,7 @@
             }
         }
 
-  .btn-submit::after {
+     .btn-submit::after {
             content: '';
             position: absolute;
             top: 0;
@@ -716,7 +716,7 @@
             transition: var(--transition);
         }
 
-           .btn-submit:hover:not(:disabled)::after {
+        .btn-submit:hover:not(:disabled)::after {
             opacity: 1;
         }
 
@@ -1099,7 +1099,6 @@
                 <h1 class="page-title">PROWEB PROJECTS</h1>
                 <p class="page-subtitle">Premium website templates with cutting-edge design and seamless performance</p>
             </header>
-
             <!-- Projects Grid -->
             <div class="projects-grid">
                 <!-- Project 1 -->
@@ -1240,7 +1239,7 @@
         </div>
     </div>
 
-    <!-- Purchase Modal -->
+   <!-- Purchase Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal">
             <div class="modal-header">
@@ -1264,7 +1263,7 @@
                         <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
                     </div>
                     
-                     <div class="form-group">
+   <div class="form-group">
                         <label class="form-label" for="mobile">Mobile Number *</label>
                         <input type="tel" id="mobile" class="form-control" placeholder="Enter your mobile number" required>
                     </div>
@@ -1345,14 +1344,28 @@
         // Open modal when Buy Now is clicked and set data attributes
         document.querySelectorAll(".btn-buy").forEach(btn => {
             btn.addEventListener("click", () => {
-                projectInput.value = btn.dataset.project;
-                githubInput.value = btn.dataset.github;
-                liveInput.value = btn.dataset.live;
+                // Get all data attributes
+                const projectName = btn.getAttribute("data-project");
+                const githubUrl = btn.getAttribute("data-github");
+                const liveUrl = btn.getAttribute("data-live");
+                
+                console.log("Opening modal for project:", projectName);
+                console.log("GitHub URL:", githubUrl);
+                console.log("Live URL:", liveUrl);
+                
+                // Set form values
+                projectInput.value = projectName;
+                githubInput.value = githubUrl;
+                liveInput.value = liveUrl;
+                
                 modal.classList.add("active");
                 document.body.style.overflow = "hidden";
                 successMsg.classList.remove("show");
                 errorMsg.classList.remove("show");
                 purchaseForm.reset();
+                
+                // Reset project field
+                projectInput.value = projectName;
             });
         });
 
@@ -1375,7 +1388,7 @@
             }
         });
 
-        // Form submission handler
+        // Form submission handler - FIXED VERSION
         purchaseForm.addEventListener("submit", async function(e) {
             e.preventDefault();
             
@@ -1388,6 +1401,15 @@
             const email = document.getElementById("email").value.trim();
             const mobile = document.getElementById("mobile").value.trim();
             const message = document.getElementById("message").value.trim();
+            const project = projectInput.value; // Get project name from input
+            
+            console.log("Form submission values:");
+            console.log("Name:", name);
+            console.log("Email:", email);
+            console.log("Mobile:", mobile);
+            console.log("Project:", project);
+            console.log("GitHub:", githubInput.value);
+            console.log("Live:", liveInput.value);
             
             // Validation
             let error = null;
@@ -1420,12 +1442,12 @@
             submitBtn.disabled = true;
             
             try {
-                // Prepare template parameters
+                // Prepare template parameters - FIXED: project_name parameter
                 const templateParams = {
                     full_name: name,
                     email: email,
                     mobile: mobile,
-                    project_name: projectInput.value,
+                    project_name: project, // This is the key fix
                     github_url: githubInput.value,
                     live_url: liveInput.value,
                     message: message || "No message provided",
@@ -1433,14 +1455,25 @@
                     time: new Date().toLocaleTimeString()
                 };
                 
+                console.log("Sending email with parameters:", templateParams);
+                
                 // Send email using EmailJS
-                await emailjs.send("service_snv7hbg", "template_x7cfn8f", templateParams);
+                const response = await emailjs.send(
+                    "service_snv7hbg", 
+                    "template_x7cfn8f", 
+                    templateParams
+                );
+                
+                console.log("Email sent successfully:", response);
                 
                 // Show success message with animation
                 successMsg.classList.add("show");
                 
-                // Reset form
-                this.reset();
+                // Reset form but keep project name
+                document.getElementById("name").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("mobile").value = "";
+                document.getElementById("message").value = "";
                 
                 // Remove loading state
                 submitBtn.classList.remove('loading');
